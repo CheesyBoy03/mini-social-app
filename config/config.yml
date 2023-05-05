@@ -4,7 +4,7 @@ server:
   hash_salt: "hash_salt"
   signing_key: "signing_key"
 database:
-  host: "localhost"
+  host: "db"
   port: 5432
   username: "root"
   password: "secretpassword"
