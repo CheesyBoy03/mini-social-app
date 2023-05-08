@@ -1,8 +1,10 @@
+DOCKER_COMPOSE_FILE ?= docker-compose.yml
+
 dev:
 	go run cmd/main.go
 
 migrate-up:
-	migrate -path ./migrations -database 'postgres://root:secretpassword@localhost:5432/dbname?sslmode=disable' up
+	docker compose -f ${DOCKER_COMPOSE_FILE} --profile tools run --rm migrate up
 
 migrate-down:
-	migrate -path ./migrations -database 'postgres://root:secretpassword@localhost:5432/dbname?sslmode=disable' down
+	docker compose -f ${DOCKER_COMPOSE_FILE} --profile tools run --rm migrate down 1
