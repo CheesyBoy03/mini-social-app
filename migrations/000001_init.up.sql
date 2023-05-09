@@ -8,7 +8,7 @@ CREATE TABLE users (
 
 CREATE TABLE posts (
     id SERIAL PRIMARY KEY,
-    author_id INT NOTE NULL,
+    author_id INT NOT NULL,
     title VARCHAR(70) NOT NULL,
     description VARCHAR(255),
     published_at timestamp DEFAULT CURRENT_TIMESTAMP,
