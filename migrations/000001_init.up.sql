@@ -12,6 +12,5 @@ CREATE TABLE posts (
     title VARCHAR(70) NOT NULL,
     description VARCHAR(255),
     published_at timestamp DEFAULT CURRENT_TIMESTAMP,
-    PRIMARY KEY (author_id),
-    FOREIGN KEY (author_id) REFERENCES users(id) ON DELETE CASCADE,
+    FOREIGN KEY (author_id) REFERENCES users(id) ON DELETE CASCADE
 )

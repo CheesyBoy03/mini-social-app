@@ -1,10 +1,10 @@
-DOCKER_COMPOSE_FILE ?= docker-compose.yml
-
-dev:
-	go run cmd/main.go
+DB_URI = "postgresql://root:secretpassword@localhost:5432/dbname?sslmode=disable"
 
 migrate-up:
-	docker compose -f ${DOCKER_COMPOSE_FILE} --profile tools run --rm migrate up
+	migrate -path migrations/ -database ${DB_URI} -verbose up
 
 migrate-down:
-	docker compose -f ${DOCKER_COMPOSE_FILE} --profile tools run --rm migrate down 1
+	migrate -path migrations/ -database ${DB_URI} -verbose down
+
+migrate-fix:
+	migrate -path migrations/ -database ${DB_URI} force VERSION
