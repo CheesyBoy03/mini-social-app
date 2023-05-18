@@ -4,6 +4,8 @@ import (
 	"database/sql"
 	"errors"
 	"fmt"
+
+	miniSocialApp "github.com/CheesyBoy03/mini-social-app"
 )
 
 type AuthRepository struct {
@@ -17,8 +19,16 @@ func NewAuthRepository(db *sql.DB) *AuthRepository {
 }
 
 func (r *AuthRepository) Authorize(email, passwordHash string) error {
+	var user *miniSocialApp.User
 	query := "SELECT * FROM users WHERE email=$1 AND password_hash=$2"
-	_, err := r.db.Query(query, email, passwordHash)
+	err := r.db.QueryRow(query, email, passwordHash).Scan(&user)
+
+	if user == nil {
+		return errors.New("Wrong email or password")
+	}
+
+	fmt.Println(user)
+
 	return err
 }
 
